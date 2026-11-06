@@ -44,7 +44,7 @@
             justify-content: center;
             align-items: center;
             padding: 30px 15px;
-            /* Background local */
+            /* Local background */
             background-image: 
                 radial-gradient(circle at 50% 20%, rgba(20, 20, 20, 0.4) 0%, rgba(5, 5, 5, 0.98) 85%),
                 url('images/bg.jpg');
@@ -54,7 +54,7 @@
             overflow-x: hidden;
         }
 
-        /* Halo Liquid Glass que acompaña la flecha del mouse */
+        /* Halo Liquid Glass cursor */
         .liquid-glass-cursor {
             width: 38px;
             height: 38px;
@@ -74,8 +74,8 @@
         }
 
         .liquid-glass-cursor.active {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03));
             border-color: rgba(255, 255, 255, 0.45);
         }
@@ -116,6 +116,11 @@
             padding: 1px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.01));
             flex-shrink: 0;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .avatar-frame:hover {
+            transform: scale(1.02);
         }
 
         .avatar {
@@ -180,6 +185,12 @@
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 16px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .showcase-box:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .showcase-img {
@@ -196,7 +207,7 @@
         }
 
         /* ==========================================
-           BLOG POST CARDS
+           BLOG POST CARDS (CON ANIMACIÓN HOVER & CLICK)
            ========================================== */
         .card {
             background: rgba(8, 8, 8, 0.45);
@@ -204,6 +215,21 @@
             border-radius: 4px;
             padding: 16px;
             margin-bottom: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Animación al posar el cursor sobre los posts */
+        .card:hover {
+            background: rgba(15, 15, 15, 0.65);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animación al presionar los posts */
+        .card:active {
+            transform: translateY(0) scale(0.99);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .card-title {
@@ -260,18 +286,112 @@
         }
 
         /* ==========================================
-           MUSIC PLAYER EMBEDDED (SPOTIFY)
+           REPRODUCTOR MINIMALISTA CON ONDAS DE AUDIO
            ========================================== */
-        .music-player {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 12px;
+        .custom-audio-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .player-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Botón Play / Pause con animación */
+        .play-toggle-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            outline: none;
+            flex-shrink: 0;
+        }
+
+        .play-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .play-toggle-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* Animación de Ondas de Sonido (Soundwave Visualizer) */
+        .wave-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+            flex-grow: 1;
+        }
+
+        .wave-bar {
+            width: 3px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 2px;
+            transition: height 0.2s ease, background-color 0.3s ease;
+        }
+
+        /* Animación CSS cuando la música está sonando */
+        .playing .wave-bar {
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+            animation: soundwave 1.2s infinite ease-in-out alternate;
+        }
+
+        .playing .wave-bar:nth-child(1) { animation-delay: 0.1s; }
+        .playing .wave-bar:nth-child(2) { animation-delay: 0.3s; }
+        .playing .wave-bar:nth-child(3) { animation-delay: 0.5s; }
+        .playing .wave-bar:nth-child(4) { animation-delay: 0.2s; }
+        .playing .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+        .playing .wave-bar:nth-child(6) { animation-delay: 0.4s; }
+        .playing .wave-bar:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes soundwave {
+            0% { height: 4px; }
+            100% { height: 18px; }
+        }
+
+        /* Barra de Progreso */
+        .progress-track {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            transition: width 0.1s linear;
         }
 
         /* ==========================================
-           INSTAGRAM LIQUID GLASS BUTTON
+           INSTAGRAM LIQUID GLASS BUTTON (HOVER & CLICK)
            ========================================== */
         .liquid-glass-btn {
             display: flex;
@@ -293,8 +413,10 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             overflow: hidden;
+            outline: none;
         }
 
+        /* Destello al posar el cursor sobre el botón */
         .liquid-glass-btn::before {
             content: '';
             position: absolute;
@@ -302,7 +424,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -310,12 +432,20 @@
             left: 100%;
         }
 
+        /* Animación HOVER */
         .liquid-glass-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
-            border-color: rgba(255, 255, 255, 0.35);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-color: rgba(255, 255, 255, 0.4);
             color: #ffffff;
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
+        }
+
+        /* Animación ACTIVE (Al hacer clic / presionar) */
+        .liquid-glass-btn:active {
+            transform: translateY(0) scale(0.96);
+            box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .ig-icon {
@@ -397,11 +527,32 @@
                     </p>
                 </div>
 
-                <!-- Music Player Section (Su canción específica integrada) -->
+                <!-- Custom Music Player with Soundwaves -->
                 <div class="stat-box">
                     <h3>Soundtrack</h3>
-                    <div class="music-player">
-                        <iframe style="border-radius:4px" src="https://open.spotify.com/embed/track/55z9JKoPKREhOv1bppouag?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <div class="custom-audio-box">
+                        <!-- Audio tag pointing to audio/song.mp3 -->
+                        <audio id="audioElement" src="audio/song.mp3" preload="metadata"></audio>
+                        
+                        <div class="player-row">
+                            <button id="playBtn" class="play-toggle-btn">▶</button>
+                            
+                            <!-- Animated Soundwave Bars -->
+                            <div class="wave-container" id="waveContainer">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Track -->
+                        <div class="progress-track" id="progressTrack">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -422,8 +573,9 @@
 
     </div>
 
-    <!-- Cursor Animation Script -->
+    <!-- Scripts: Cursor Halo & Audio Player Logic -->
     <script>
+        /* 1. Cursor Halo Animation */
         const glassCursor = document.getElementById('glassCursor');
         let mouseX = 0, mouseY = 0;
         let cursorX = 0, cursorY = 0;
@@ -444,10 +596,50 @@
         }
         animateCursor();
 
-        const hoverables = document.querySelectorAll('a, .showcase-box, .card');
+        const hoverables = document.querySelectorAll('a, button, .showcase-box, .card');
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => glassCursor.classList.add('active'));
             el.addEventListener('mouseleave', () => glassCursor.classList.remove('active'));
+        });
+
+        /* 2. Custom Audio Player Logic */
+        const audio = document.getElementById('audioElement');
+        const playBtn = document.getElementById('playBtn');
+        const waveContainer = document.getElementById('waveContainer');
+        const progressTrack = document.getElementById('progressTrack');
+        const progressFill = document.getElementById('progressFill');
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = '❚❚';
+                waveContainer.classList.add('playing');
+            } else {
+                audio.pause();
+                playBtn.textContent = '▶';
+                waveContainer.classList.remove('playing');
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${percent}%`;
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            playBtn.textContent = '▶';
+            waveContainer.classList.remove('playing');
+            progressFill.style.width = '0%';
+        });
+
+        progressTrack.addEventListener('click', (e) => {
+            const rect = progressTrack.getBoundingClientRect();
+            const clickPos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = clickPos * audio.duration;
+            }
         });
     </script>
 </body>
