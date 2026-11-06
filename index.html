@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +11,12 @@
 
     <style>
         /* ==========================================
-           RESET & CURSOR SISTEMA CON GLASSMORPHISM
+           RESET & CURSOR SYSTEM WITH GLASSMORPHISM
            ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Mantiene la flecha / pointer original del mouse */
             cursor: auto;
         }
 
@@ -41,17 +40,17 @@
             justify-content: center;
             align-items: center;
             padding: 30px 15px;
-            /* Fondo de paisaje helado monocromático */
+            /* Background loaded from local images folder */
             background-image: 
                 radial-gradient(circle at 50% 20%, rgba(20, 20, 20, 0.4) 0%, rgba(5, 5, 5, 0.98) 85%),
-                url('showcase.jpg');
+                url('images/bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        /* Halo Gótico Glassmorphism que rodea el cursor original */
+        /* Gothic Glassmorphism Halo following the system cursor */
         .gothic-glass-cursor {
             width: 36px;
             height: 36px;
@@ -79,7 +78,7 @@
         }
 
         /* ==========================================
-           CONTENEDOR PRINCIPAL
+           MAIN CONTAINER
            ========================================== */
         .steam-container {
             width: 100%;
@@ -97,7 +96,7 @@
         }
 
         /* ==========================================
-           HEADER / PERFIL
+           HEADER / PROFILE
            ========================================== */
         .profile-header {
             display: flex;
@@ -143,7 +142,7 @@
         }
 
         /* ==========================================
-           DIVISORES CON SIMBOLOS UNICODE
+           UNICODE DIVIDERS
            ========================================== */
         .aesthetic-divider {
             text-align: center;
@@ -155,7 +154,7 @@
         }
 
         /* ==========================================
-           GRID DE CONTENIDO
+           GRID LAYOUT
            ========================================== */
         .main-content {
             display: grid;
@@ -170,7 +169,7 @@
         }
 
         /* ==========================================
-           SHOWCASE VISUAL (IMAGEN DEL MEDIO)
+           VISUAL SHOWCASE
            ========================================== */
         .showcase-box {
             background: rgba(4, 4, 4, 0.7);
@@ -194,7 +193,7 @@
         }
 
         /* ==========================================
-           ENTRADAS DE BLOG
+           BLOG POST CARDS
            ========================================== */
         .card {
             background: rgba(8, 8, 8, 0.45);
@@ -227,7 +226,7 @@
         }
 
         /* ==========================================
-           SIDEBAR DERECHO
+           RIGHT SIDEBAR
            ========================================== */
         .sidebar {
             display: flex;
@@ -278,7 +277,7 @@
         }
 
         /* ==========================================
-           BOTÓN LIQUID GLASS INSTAGRAM
+           INSTAGRAM LIQUID GLASS BUTTON
            ========================================== */
         .liquid-glass-btn {
             display: flex;
@@ -335,16 +334,16 @@
 </head>
 <body>
 
-    <!-- Halo Glassmorphism que persigue al cursor del sistema -->
+    <!-- Glassmorphism halo following system cursor -->
     <div class="gothic-glass-cursor" id="glassCursor"></div>
 
     <div class="steam-container">
         
-        <!-- Header del Perfil -->
+        <!-- Profile Header -->
         <header class="profile-header">
             <div class="avatar-frame">
-                <!-- Foto de perfil chica anime alas negras: pfp.jpg -->
-                <img src="pfp.jpg" alt="ruinnerds avatar" class="avatar">
+                <!-- Local image inside images/ folder -->
+                <img src="images/pfp.jpg" alt="ruinnerds avatar" class="avatar">
             </div>
             <div class="profile-info">
                 <h1>ruinnerds</h1>
@@ -352,23 +351,23 @@
             </div>
         </header>
 
-        <!-- Separador de Kaomojis y Simbolos Unicode -->
+        <!-- Kaomoji & Unicode Divider -->
         <div class="aesthetic-divider">
             ( ｡ • ̀ ─ • ́ ｡ ) ─── 🕇 ─── ( • ☠ • )
         </div>
 
-        <!-- Layout General -->
+        <!-- Main Layout -->
         <div class="main-content">
             
-            <!-- Columna Izquierda -->
+            <!-- Left Column: Posts & Showcase -->
             <section class="left-column">
                 
-                <!-- Showcase Fotográfico (Segunda imagen enviada: showcase.jpg) -->
+                <!-- Center Showcase Image (images/showcase.jpg) -->
                 <div class="showcase-box">
-                    <img src="showcase.jpg" alt="Montaña Nevada Showcase" class="showcase-img">
+                    <img src="images/showcase.jpg" alt="Snow Mountain Showcase" class="showcase-img">
                 </div>
 
-                <!-- Entrada 1 -->
+                <!-- Post 1 -->
                 <article class="card">
                     <div class="card-title">
                         <span>✦ fading into the grey</span>
@@ -379,33 +378,33 @@
                     </p>
                 </article>
 
-                <!-- Entrada 2 -->
+                <!-- Post 2 -->
                 <article class="card">
                     <div class="card-title">
                         <span>✦ frost on the glass</span>
                         <span class="card-date">NOV 01</span>
                     </div>
                     <p class="card-text">
-                        días fríos, cafeína fría y un bucle infinito de canciones tristes que ya conozco de memoria. 🕷 ⛓ ( ᵒ̴̶̷᷄꒳ᵒ̴̶̷᷅ )
+                        cold days, cold caffeine, and an endless loop of sad songs I already know by heart. 🕷 ⛓ ( ᵒ̴̶̷᷄꒳ᵒ̴̶̷᷅ )
                     </p>
                 </article>
 
             </section>
 
-            <!-- Columna Derecha: Sidebar y Redes -->
+            <!-- Right Sidebar -->
             <aside class="sidebar">
                 
-                <!-- Frase Emo + Unicode -->
+                <!-- About / Emo Bio -->
                 <div class="stat-box">
                     <h3>About</h3>
                     <p class="bio-text">
                         "too tired to pretend, too numb to care" ( ; ω ; ) 🗡
                         <br><br>
-                        habitando espacios vacíos, lazos rotos y baja frecuencia. (¬_¬")
+                        dwelling in empty spaces, broken ties, and low frequencies. (¬_¬")
                     </p>
                 </div>
 
-                <!-- Detalles / Estadísticas Estilo Steam -->
+                <!-- Steam Style Details -->
                 <div class="stat-box">
                     <h3>Parameters</h3>
                     <div class="list-item">
@@ -422,11 +421,10 @@
                     </div>
                 </div>
 
-                <!-- Enlace Instagram Liquid Glass -->
+                <!-- Liquid Glass Instagram Link -->
                 <div class="stat-box">
                     <h3>Social</h3>
                     <a href="https://www.instagram.com/ruinnerds?vrfl=MWx0cmc5cGJhc3c0eg==" target="_blank" class="liquid-glass-btn">
-                        <!-- Icono SVG de Instagram integrado -->
                         <svg class="ig-icon" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
@@ -440,7 +438,7 @@
 
     </div>
 
-    <!-- JS del Halo Glassmorphism del Cursor -->
+    <!-- Cursor Animation Script -->
     <script>
         const glassCursor = document.getElementById('glassCursor');
         let mouseX = 0, mouseY = 0;
@@ -462,7 +460,6 @@
         }
         animateCursor();
 
-        // Expansión del cristal al pasar sobre elementos clicables
         const hoverables = document.querySelectorAll('a, .showcase-box, .card');
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => glassCursor.classList.add('active'));
