@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ruinnerds // e/mo</title>
-    <!-- Tipografía Open Sans Light desde Google Fonts -->
+    <!-- Open Sans Light -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
-           RESET & CONFIGURACIÓN BASE
+           RESET & CURSOR SISTEMA CON GLASSMORPHISM
            ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Oculta el cursor por defecto para usar el cursor gótico personalizado */
-            cursor: none !important;
+            /* Mantiene la flecha / pointer original del mouse */
+            cursor: auto;
         }
 
         :root {
@@ -41,57 +41,41 @@
             justify-content: center;
             align-items: center;
             padding: 30px 15px;
-            /* Fondo de paisaje brumoso / nieve estilo monocromático */
+            /* Fondo de paisaje helado monocromático */
             background-image: 
                 radial-gradient(circle at 50% 20%, rgba(20, 20, 20, 0.4) 0%, rgba(5, 5, 5, 0.98) 85%),
-                url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1920&auto=format&fit=crop');
+                url('showcase.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        /* ==========================================
-           CURSOR GLASSMORPHISM GÓTICO
-           ========================================== */
-        .gothic-cursor-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #ffffff;
+        /* Halo Gótico Glassmorphism que rodea el cursor original */
+        .gothic-glass-cursor {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border-radius: 50%;
             position: fixed;
             top: 0;
             left: 0;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05), inset 0 0 8px rgba(255, 255, 255, 0.05);
+            transition: transform 0.08s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
         }
 
-        .gothic-cursor-follower {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, background 0.2s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        /* Efecto al pasar sobre elementos interactivos */
-        .gothic-cursor-follower.active {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.5);
+        .gothic-glass-cursor.active {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
         }
 
         /* ==========================================
@@ -137,7 +121,7 @@
             height: 100%;
             border-radius: 3px;
             object-fit: cover;
-            filter: grayscale(100%) contrast(120%) brightness(90%);
+            filter: grayscale(100%) contrast(115%) brightness(95%);
         }
 
         .profile-info h1 {
@@ -159,7 +143,7 @@
         }
 
         /* ==========================================
-           DIVISORES Y KAOMOJIS
+           DIVISORES CON SIMBOLOS UNICODE
            ========================================== */
         .aesthetic-divider {
             text-align: center;
@@ -186,7 +170,7 @@
         }
 
         /* ==========================================
-           SHOWCASE VISUAL
+           SHOWCASE VISUAL (IMAGEN DEL MEDIO)
            ========================================== */
         .showcase-box {
             background: rgba(4, 4, 4, 0.7);
@@ -201,7 +185,7 @@
             height: 250px;
             object-fit: cover;
             display: block;
-            filter: grayscale(100%) brightness(80%) contrast(110%);
+            filter: grayscale(100%) brightness(85%) contrast(110%);
             transition: filter 0.4s ease;
         }
 
@@ -294,42 +278,72 @@
         }
 
         /* ==========================================
-           BOTÓN DE INSTAGRAM
+           BOTÓN LIQUID GLASS INSTAGRAM
            ========================================== */
-        .social-btn {
-            display: block;
+        .liquid-glass-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            text-align: center;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-subtle);
-            border-radius: 4px;
-            color: #999999;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 6px;
+            color: #e0e0e0;
             text-decoration: none;
-            font-size: 0.72rem;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .social-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-bright);
-            border-color: rgba(255, 255, 255, 0.2);
+        .liquid-glass-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .liquid-glass-btn:hover::before {
+            left: 100%;
+        }
+
+        .liquid-glass-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .ig-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            opacity: 0.85;
         }
     </style>
 </head>
 <body>
 
-    <!-- Elementos del Cursor Gótico Glassmorphism -->
-    <div class="gothic-cursor-dot" id="cursorDot"></div>
-    <div class="gothic-cursor-follower" id="cursorFollower"></div>
+    <!-- Halo Glassmorphism que persigue al cursor del sistema -->
+    <div class="gothic-glass-cursor" id="glassCursor"></div>
 
     <div class="steam-container">
         
         <!-- Header del Perfil -->
         <header class="profile-header">
             <div class="avatar-frame">
-                <!-- Imagen de perfil local en el repositorio: pfp.jpg -->
+                <!-- Foto de perfil chica anime alas negras: pfp.jpg -->
                 <img src="pfp.jpg" alt="ruinnerds avatar" class="avatar">
             </div>
             <div class="profile-info">
@@ -338,20 +352,20 @@
             </div>
         </header>
 
-        <!-- Separador Emo Kaomoji -->
+        <!-- Separador de Kaomojis y Simbolos Unicode -->
         <div class="aesthetic-divider">
-            ( ｡ • ̀ ─ • ́ ｡ ) ─── ⋆⋅☆⋅⋆ ─── ( • 💔 • )
+            ( ｡ • ̀ ─ • ́ ｡ ) ─── 🕇 ─── ( • ☠ • )
         </div>
 
         <!-- Layout General -->
         <div class="main-content">
             
-            <!-- Columna Izquierda: Entradas y Visual -->
+            <!-- Columna Izquierda -->
             <section class="left-column">
                 
-                <!-- Showcase Fotográfico Minimalista -->
+                <!-- Showcase Fotográfico (Segunda imagen enviada: showcase.jpg) -->
                 <div class="showcase-box">
-                    <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1000&auto=format&fit=crop" alt="Foggy Mountain Showcase" class="showcase-img">
+                    <img src="showcase.jpg" alt="Montaña Nevada Showcase" class="showcase-img">
                 </div>
 
                 <!-- Entrada 1 -->
@@ -361,7 +375,7 @@
                         <span class="card-date">NOV 06</span>
                     </div>
                     <p class="card-text">
-                        "sometimes you just stare at the ceiling and listen to the silence get louder." (っ - ﹏ - ｡) c'est la vie.
+                        "sometimes you just stare at the ceiling and listen to the silence get louder." (っ - ﹏ - ｡) 🕇
                     </p>
                 </article>
 
@@ -372,7 +386,7 @@
                         <span class="card-date">NOV 01</span>
                     </div>
                     <p class="card-text">
-                        días fríos, cafeína fría y un bucle infinito de canciones tristes que ya conozco de memoria. 🕷️⛓️ ( ᵒ̴̶̷᷄꒳ᵒ̴̶̷᷅ )
+                        días fríos, cafeína fría y un bucle infinito de canciones tristes que ya conozco de memoria. 🕷 ⛓ ( ᵒ̴̶̷᷄꒳ᵒ̴̶̷᷅ )
                     </p>
                 </article>
 
@@ -381,11 +395,11 @@
             <!-- Columna Derecha: Sidebar y Redes -->
             <aside class="sidebar">
                 
-                <!-- Frase Emo + Kaomojis -->
+                <!-- Frase Emo + Unicode -->
                 <div class="stat-box">
                     <h3>About</h3>
                     <p class="bio-text">
-                        "too tired to pretend, too numb to care" ( ; ω ; ) 🥀
+                        "too tired to pretend, too numb to care" ( ; ω ; ) 🗡
                         <br><br>
                         habitando espacios vacíos, lazos rotos y baja frecuencia. (¬_¬")
                     </p>
@@ -396,7 +410,7 @@
                     <h3>Parameters</h3>
                     <div class="list-item">
                         <span>State</span>
-                        <span>detached ( 🌧️ )</span>
+                        <span>detached ✦</span>
                     </div>
                     <div class="list-item">
                         <span>Aura</span>
@@ -404,14 +418,20 @@
                     </div>
                     <div class="list-item">
                         <span>Soundtrack</span>
-                        <span>slowcore</span>
+                        <span>slowcore 🕇</span>
                     </div>
                 </div>
 
-                <!-- Enlace Directo a Instagram -->
+                <!-- Enlace Instagram Liquid Glass -->
                 <div class="stat-box">
                     <h3>Social</h3>
-                    <a href="https://www.instagram.com/ruinnerds?vrfl=MWx0cmc5cGJhc3c0eg==" target="_blank" class="social-btn">INSTAGRAM 🥀</a>
+                    <a href="https://www.instagram.com/ruinnerds?vrfl=MWx0cmc5cGJhc3c0eg==" target="_blank" class="liquid-glass-btn">
+                        <!-- Icono SVG de Instagram integrado -->
+                        <svg class="ig-icon" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        INSTAGRAM
+                    </a>
                 </div>
 
             </aside>
@@ -420,40 +440,33 @@
 
     </div>
 
-    <!-- Script de Animación del Cursor Gótico Glassmorphism -->
+    <!-- JS del Halo Glassmorphism del Cursor -->
     <script>
-        const dot = document.getElementById('cursorDot');
-        const follower = document.getElementById('cursorFollower');
-
+        const glassCursor = document.getElementById('glassCursor');
         let mouseX = 0, mouseY = 0;
-        let followerX = 0, followerY = 0;
+        let cursorX = 0, cursorY = 0;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            // Mueve el punto central instantáneamente
-            dot.style.left = `${mouseX}px`;
-            dot.style.top = `${mouseY}px`;
         });
 
-        function animateFollower() {
-            // Movimiento suave del aro traslúcido
-            followerX += (mouseX - followerX) * 0.15;
-            followerY += (mouseY - followerY) * 0.15;
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
 
-            follower.style.left = `${followerX}px`;
-            follower.style.top = `${followerY}px`;
+            glassCursor.style.left = `${cursorX}px`;
+            glassCursor.style.top = `${cursorY}px`;
 
-            requestAnimationFrame(animateFollower);
+            requestAnimationFrame(animateCursor);
         }
-        animateFollower();
+        animateCursor();
 
-        // Expansión del halo al pasar sobre enlaces o elementos interactivos
-        const interactiveElements = document.querySelectorAll('a, .showcase-box, .card');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => follower.classList.add('active'));
-            el.addEventListener('mouseleave', () => follower.classList.remove('active'));
+        // Expansión del cristal al pasar sobre elementos clicables
+        const hoverables = document.querySelectorAll('a, .showcase-box, .card');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => glassCursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => glassCursor.classList.remove('active'));
         });
     </script>
 </body>
