@@ -3,126 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyx • Personal Blog</title>
-    <!-- Fuentes delicadas desde Google Fonts -->
+    <title>ruinnerds // e/mo</title>
+    <!-- Tipografía Open Sans Light desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset y Variables Monocromáticas */
+        /* ==========================================
+           RESET & CONFIGURACIÓN BASE
+           ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Oculta el cursor por defecto para usar el cursor gótico personalizado */
+            cursor: none !important;
+        }
+
+        :root {
+            --bg-deep: #050505;
+            --container-bg: rgba(10, 10, 10, 0.88);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-main: #b8b8b8;
+            --text-muted: #666666;
+            --text-bright: #f0f0f0;
+            --font-stack: 'Helvetica Neue', 'Open Sans', Arial, sans-serif;
         }
 
         body {
-            background: #0a0a0a;
-            color: #d8d8d8;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            font-weight: 300;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            /* Fondo brumoso sutil estilo Steam */
+            padding: 30px 15px;
+            /* Fondo de paisaje brumoso / nieve estilo monocromático */
             background-image: 
-                radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.95) 70%),
-                url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop'); /* Puedes cambiar esta imagen de fondo */
+                radial-gradient(circle at 50% 20%, rgba(20, 20, 20, 0.4) 0%, rgba(5, 5, 5, 0.98) 85%),
+                url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        /* Contenedor Principal Estilo Steam Profile */
+        /* ==========================================
+           CURSOR GLASSMORPHISM GÓTICO
+           ========================================== */
+        .gothic-cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            transform: translate(-50%, -50%);
+        }
+
+        .gothic-cursor-follower {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Efecto al pasar sobre elementos interactivos */
+        .gothic-cursor-follower.active {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==========================================
+           CONTENEDOR PRINCIPAL
+           ========================================== */
         .steam-container {
             width: 100%;
-            max-width: 900px;
-            background: rgba(18, 18, 18, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            padding: 24px;
+            max-width: 840px;
+            background: var(--container-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+            padding: 28px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* Header de Perfil */
+        /* ==========================================
+           HEADER / PERFIL
+           ========================================== */
         .profile-header {
             display: flex;
             align-items: center;
             gap: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .avatar-frame {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            padding: 3px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+            width: 90px;
+            height: 90px;
+            border-radius: 4px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.01));
+            flex-shrink: 0;
         }
 
         .avatar {
             width: 100%;
             height: 100%;
-            border-radius: 6px;
+            border-radius: 3px;
             object-fit: cover;
-            filter: grayscale(80%) contrast(110%);
-        }
-
-        .profile-info {
-            flex-grow: 1;
+            filter: grayscale(100%) contrast(120%) brightness(90%);
         }
 
         .profile-info h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            color: #ffffff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            color: var(--text-bright);
             font-weight: 400;
+            text-transform: lowercase;
         }
 
-        .profile-info p {
-            font-size: 0.85rem;
-            color: #a0a0a0;
-            margin-top: 4px;
-        }
-
-        /* Reproductor de Música Ficticio / Minireproductor */
-        .music-status {
-            margin-top: 10px;
+        .profile-info .subtitle {
             font-size: 0.8rem;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 6px 12px;
-            border-radius: 20px;
-            width: fit-content;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-top: 4px;
+            font-weight: 300;
+            text-transform: lowercase;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #ffffff;
+        /* ==========================================
+           DIVISORES Y KAOMOJIS
+           ========================================== */
+        .aesthetic-divider {
+            text-align: center;
+            letter-spacing: 4px;
+            color: #444444;
+            font-size: 0.75rem;
+            margin: 2px 0;
+            user-select: none;
         }
 
-        /* Layout Principal: Columna Izquierda (Contenido) y Derecha (Sidebar) */
+        /* ==========================================
+           GRID DE CONTENIDO
+           ========================================== */
         .main-content {
             display: grid;
-            grid-template-columns: 2.2fr 1fr;
+            grid-template-columns: 2.1fr 1fr;
             gap: 20px;
         }
 
@@ -132,60 +185,66 @@
             }
         }
 
-        /* Showcase Principal (Imagen destacada / Galería) */
+        /* ==========================================
+           SHOWCASE VISUAL
+           ========================================== */
         .showcase-box {
-            background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
+            background: rgba(4, 4, 4, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .showcase-img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
             display: block;
-            filter: grayscale(90%) brightness(90%) contrast(105%);
+            filter: grayscale(100%) brightness(80%) contrast(110%);
             transition: filter 0.4s ease;
         }
 
         .showcase-img:hover {
-            filter: grayscale(20%) brightness(95%);
+            filter: grayscale(40%) brightness(95%);
         }
 
-        /* Cajas de Blog / Entradas */
+        /* ==========================================
+           ENTRADAS DE BLOG
+           ========================================== */
         .card {
-            background: rgba(15, 15, 15, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+            background: rgba(8, 8, 8, 0.45);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
             padding: 16px;
             margin-bottom: 16px;
         }
 
         .card-title {
-            font-size: 0.95rem;
-            color: #eeeeee;
+            font-size: 0.85rem;
+            color: #d0d0d0;
             margin-bottom: 8px;
-            letter-spacing: 1px;
-            font-weight: 600;
+            letter-spacing: 0.8px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
         .card-date {
-            font-size: 0.75rem;
-            color: #666;
-            font-weight: 300;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
 
         .card-text {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             line-height: 1.6;
-            color: #b5b5b5;
+            color: #999999;
         }
 
-        /* Sidebar Derecho */
+        /* ==========================================
+           SIDEBAR DERECHO
+           ========================================== */
         .sidebar {
             display: flex;
             flex-direction: column;
@@ -193,26 +252,33 @@
         }
 
         .stat-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            background: rgba(6, 6, 6, 0.5);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
             padding: 14px;
         }
 
         .stat-box h3 {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #777;
+            letter-spacing: 2px;
+            color: #555555;
             margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .bio-text {
+            font-size: 0.8rem;
+            color: #888888;
+            line-height: 1.6;
         }
 
         .list-item {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
 
         .list-item:last-child {
@@ -220,158 +286,132 @@
         }
 
         .list-item span:first-child {
-            color: #999;
+            color: var(--text-muted);
         }
 
         .list-item span:last-child {
-            color: #fff;
-            font-weight: 600;
+            color: #aaaaaa;
         }
 
-        /* Kaomojis & Marquee / Separadores decorativos */
-        .aesthetic-divider {
-            text-align: center;
-            letter-spacing: 4px;
-            color: #666;
-            font-size: 0.8rem;
-            margin: 10px 0;
-            user-select: none;
-        }
-
-        /* Enlaces / Redes Sociales */
-        .social-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
+        /* ==========================================
+           BOTÓN DE INSTAGRAM
+           ========================================== */
         .social-btn {
-            flex: 1;
+            display: block;
+            width: 100%;
             text-align: center;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 6px;
-            color: #ccc;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            color: #999999;
             text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
             transition: all 0.3s ease;
         }
 
         .social-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-bright);
+            border-color: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
+
+    <!-- Elementos del Cursor Gótico Glassmorphism -->
+    <div class="gothic-cursor-dot" id="cursorDot"></div>
+    <div class="gothic-cursor-follower" id="cursorFollower"></div>
 
     <div class="steam-container">
         
         <!-- Header del Perfil -->
         <header class="profile-header">
             <div class="avatar-frame">
-                <!-- Cambia la URL por su foto de avatar -->
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Avatar" class="avatar">
+                <!-- Imagen de perfil local en el repositorio: pfp.jpg -->
+                <img src="pfp.jpg" alt="ruinnerds avatar" class="avatar">
             </div>
             <div class="profile-info">
-                <h1>Nyx ༻✧˚.･</h1>
-                <p>☁️ lost in thought • 📍 In my own space</p>
-                <div class="music-status">
-                    <span class="status-dot"></span> Listening to: <i>Deftones - Sextape</i>
-                </div>
+                <h1>ruinnerds</h1>
+                <div class="subtitle">e/mo</div>
             </div>
         </header>
 
-        <!-- Separador Decorativo de Kaomojis -->
+        <!-- Separador Emo Kaomoji -->
         <div class="aesthetic-divider">
-            ✧･ﾟ: *✧･ﾟ:* ( ˶ˆ꒳ˆ˵ ) *:･ﾟ✧*:･ﾟ✧
+            ( ｡ • ̀ ─ • ́ ｡ ) ─── ⋆⋅☆⋅⋆ ─── ( • 💔 • )
         </div>
 
-        <!-- Layout de Contenido -->
+        <!-- Layout General -->
         <div class="main-content">
             
-            <!-- Columna Izquierda: Contenido Principal y Posts -->
+            <!-- Columna Izquierda: Entradas y Visual -->
             <section class="left-column">
                 
-                <!-- Showcase Visual (Simulando el Showcase de Arte de Steam) -->
+                <!-- Showcase Fotográfico Minimalista -->
                 <div class="showcase-box">
-                    <!-- Cambia la URL por su imagen artística favorita -->
-                    <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1000&auto=format&fit=crop" alt="Art Showcase" class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1000&auto=format&fit=crop" alt="Foggy Mountain Showcase" class="showcase-img">
                 </div>
 
-                <!-- Entrada de Blog 1 -->
+                <!-- Entrada 1 -->
                 <article class="card">
                     <div class="card-title">
-                        <span>✦ Un lugar tranquilo en internet</span>
-                        <span class="card-date">06 Nov 2026</span>
+                        <span>✦ fading into the grey</span>
+                        <span class="card-date">NOV 06</span>
                     </div>
                     <p class="card-text">
-                        Bienvenido/a a mi pequeño rincón web. Diseñé este espacio inspirándome en la tranquilidad, el estilo monocromático y los días nublados. Aquí iré compartiendo notas, fotos, música que escucho y pensamientos cotidianos.
+                        "sometimes you just stare at the ceiling and listen to the silence get louder." (っ - ﹏ - ｡) c'est la vie.
                     </p>
                 </article>
 
-                <!-- Entrada de Blog 2 -->
+                <!-- Entrada 2 -->
                 <article class="card">
                     <div class="card-title">
-                        <span>✦ Mis lecturas & estética favorita</span>
-                        <span class="card-date">02 Nov 2026</span>
+                        <span>✦ frost on the glass</span>
+                        <span class="card-date">NOV 01</span>
                     </div>
                     <p class="card-text">
-                        Últimamente he estado muy obsesionada con los tonos escala de grises, la estética vintage minimalista y las melodías lofi/ambient. 
-                        <br><br>
-                        <i>"We are all in the gutter, but some of us are looking at the stars."</i>
+                        días fríos, cafeína fría y un bucle infinito de canciones tristes que ya conozco de memoria. 🕷️⛓️ ( ᵒ̴̶̷᷄꒳ᵒ̴̶̷᷅ )
                     </p>
                 </article>
 
             </section>
 
-            <!-- Columna Derecha: Sidebar (Detalles, Estadísticas y Links) -->
+            <!-- Columna Derecha: Sidebar y Redes -->
             <aside class="sidebar">
                 
-                <!-- Cuadro de Bios / Sobre Mí -->
+                <!-- Frase Emo + Kaomojis -->
                 <div class="stat-box">
-                    <h3>About Me</h3>
-                    <p style="font-size: 0.8rem; color: #a0a0a0; line-height: 1.5;">
-                        Amante del arte visual, las noches frías y la buena música. Creando mi propio espacio fuera del ruido de las redes tradicionales.
+                    <h3>About</h3>
+                    <p class="bio-text">
+                        "too tired to pretend, too numb to care" ( ; ω ; ) 🥀
+                        <br><br>
+                        habitando espacios vacíos, lazos rotos y baja frecuencia. (¬_¬")
                     </p>
                 </div>
 
-                <!-- Cuadro Estilo Estadísticas de Steam -->
+                <!-- Detalles / Estadísticas Estilo Steam -->
                 <div class="stat-box">
-                    <h3>Favorites</h3>
+                    <h3>Parameters</h3>
                     <div class="list-item">
-                        <span>Season</span>
-                        <span>Autumn 🍁</span>
+                        <span>State</span>
+                        <span>detached ( 🌧️ )</span>
                     </div>
                     <div class="list-item">
-                        <span>Color</span>
-                        <span>Monochrome</span>
+                        <span>Aura</span>
+                        <span>monochrome</span>
                     </div>
                     <div class="list-item">
-                        <span>Vibe</span>
-                        <span>Nocturnal</span>
-                    </div>
-                    <div class="list-item">
-                        <span>Coffee/Tea</span>
-                        <span>Matcha</span>
+                        <span>Soundtrack</span>
+                        <span>slowcore</span>
                     </div>
                 </div>
 
-                <!-- Enlaces / Redes Sociales -->
+                <!-- Enlace Directo a Instagram -->
                 <div class="stat-box">
-                    <h3>Connect</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-btn">INSTAGRAM</a>
-                        <a href="#" class="social-btn">SPOTIFY</a>
-                    </div>
-                </div>
-
-                <!-- Adorno Kaomoji Final -->
-                <div style="text-align: center; color: #555; font-size: 0.75rem; margin-top: 10px;">
-                    (っ 🏃‍♀️)っ 🖤
+                    <h3>Social</h3>
+                    <a href="https://www.instagram.com/ruinnerds?vrfl=MWx0cmc5cGJhc3c0eg==" target="_blank" class="social-btn">INSTAGRAM 🥀</a>
                 </div>
 
             </aside>
@@ -380,5 +420,41 @@
 
     </div>
 
+    <!-- Script de Animación del Cursor Gótico Glassmorphism -->
+    <script>
+        const dot = document.getElementById('cursorDot');
+        const follower = document.getElementById('cursorFollower');
+
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Mueve el punto central instantáneamente
+            dot.style.left = `${mouseX}px`;
+            dot.style.top = `${mouseY}px`;
+        });
+
+        function animateFollower() {
+            // Movimiento suave del aro traslúcido
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+
+            follower.style.left = `${followerX}px`;
+            follower.style.top = `${followerY}px`;
+
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Expansión del halo al pasar sobre enlaces o elementos interactivos
+        const interactiveElements = document.querySelectorAll('a, .showcase-box, .card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => follower.classList.add('active'));
+            el.addEventListener('mouseleave', () => follower.classList.remove('active'));
+        });
+    </script>
 </body>
 </html>
