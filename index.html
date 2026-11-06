@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyx • Personal Blog</title>
+    <!-- Fuentes delicadas desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset y Variables Monocromáticas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #d8d8d8;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Fondo brumoso sutil estilo Steam */
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.95) 70%),
+                url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop'); /* Puedes cambiar esta imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Contenedor Principal Estilo Steam Profile */
+        .steam-container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header de Perfil */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .avatar-frame {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            padding: 3px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            object-fit: cover;
+            filter: grayscale(80%) contrast(110%);
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .profile-info p {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-top: 4px;
+        }
+
+        /* Reproductor de Música Ficticio / Minireproductor */
+        .music-status {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            width: fit-content;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff;
+        }
+
+        /* Layout Principal: Columna Izquierda (Contenido) y Derecha (Sidebar) */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Showcase Principal (Imagen destacada / Galería) */
+        .showcase-box {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(90%) brightness(90%) contrast(105%);
+            transition: filter 0.4s ease;
+        }
+
+        .showcase-img:hover {
+            filter: grayscale(20%) brightness(95%);
+        }
+
+        /* Cajas de Blog / Entradas */
+        .card {
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            color: #eeeeee;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #b5b5b5;
+        }
+
+        /* Sidebar Derecho */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .stat-box h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item span:first-child {
+            color: #999;
+        }
+
+        .list-item span:last-child {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Kaomojis & Marquee / Separadores decorativos */
+        .aesthetic-divider {
+            text-align: center;
+            letter-spacing: 4px;
+            color: #666;
+            font-size: 0.8rem;
+            margin: 10px 0;
+            user-select: none;
+        }
+
+        /* Enlaces / Redes Sociales */
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="steam-container">
+        
+        <!-- Header del Perfil -->
+        <header class="profile-header">
+            <div class="avatar-frame">
+                <!-- Cambia la URL por su foto de avatar -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Avatar" class="avatar">
+            </div>
+            <div class="profile-info">
+                <h1>Nyx ༻✧˚.･</h1>
+                <p>☁️ lost in thought • 📍 In my own space</p>
+                <div class="music-status">
+                    <span class="status-dot"></span> Listening to: <i>Deftones - Sextape</i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Separador Decorativo de Kaomojis -->
+        <div class="aesthetic-divider">
+            ✧･ﾟ: *✧･ﾟ:* ( ˶ˆ꒳ˆ˵ ) *:･ﾟ✧*:･ﾟ✧
+        </div>
+
+        <!-- Layout de Contenido -->
+        <div class="main-content">
+            
+            <!-- Columna Izquierda: Contenido Principal y Posts -->
+            <section class="left-column">
+                
+                <!-- Showcase Visual (Simulando el Showcase de Arte de Steam) -->
+                <div class="showcase-box">
+                    <!-- Cambia la URL por su imagen artística favorita -->
+                    <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1000&auto=format&fit=crop" alt="Art Showcase" class="showcase-img">
+                </div>
+
+                <!-- Entrada de Blog 1 -->
+                <article class="card">
+                    <div class="card-title">
+                        <span>✦ Un lugar tranquilo en internet</span>
+                        <span class="card-date">06 Nov 2026</span>
+                    </div>
+                    <p class="card-text">
+                        Bienvenido/a a mi pequeño rincón web. Diseñé este espacio inspirándome en la tranquilidad, el estilo monocromático y los días nublados. Aquí iré compartiendo notas, fotos, música que escucho y pensamientos cotidianos.
+                    </p>
+                </article>
+
+                <!-- Entrada de Blog 2 -->
+                <article class="card">
+                    <div class="card-title">
+                        <span>✦ Mis lecturas & estética favorita</span>
+                        <span class="card-date">02 Nov 2026</span>
+                    </div>
+                    <p class="card-text">
+                        Últimamente he estado muy obsesionada con los tonos escala de grises, la estética vintage minimalista y las melodías lofi/ambient. 
+                        <br><br>
+                        <i>"We are all in the gutter, but some of us are looking at the stars."</i>
+                    </p>
+                </article>
+
+            </section>
+
+            <!-- Columna Derecha: Sidebar (Detalles, Estadísticas y Links) -->
+            <aside class="sidebar">
+                
+                <!-- Cuadro de Bios / Sobre Mí -->
+                <div class="stat-box">
+                    <h3>About Me</h3>
+                    <p style="font-size: 0.8rem; color: #a0a0a0; line-height: 1.5;">
+                        Amante del arte visual, las noches frías y la buena música. Creando mi propio espacio fuera del ruido de las redes tradicionales.
+                    </p>
+                </div>
+
+                <!-- Cuadro Estilo Estadísticas de Steam -->
+                <div class="stat-box">
+                    <h3>Favorites</h3>
+                    <div class="list-item">
+                        <span>Season</span>
+                        <span>Autumn 🍁</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Color</span>
+                        <span>Monochrome</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Vibe</span>
+                        <span>Nocturnal</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Coffee/Tea</span>
+                        <span>Matcha</span>
+                    </div>
+                </div>
+
+                <!-- Enlaces / Redes Sociales -->
+                <div class="stat-box">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-btn">INSTAGRAM</a>
+                        <a href="#" class="social-btn">SPOTIFY</a>
+                    </div>
+                </div>
+
+                <!-- Adorno Kaomoji Final -->
+                <div style="text-align: center; color: #555; font-size: 0.75rem; margin-top: 10px;">
+                    (っ 🏃‍♀️)っ 🖤
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
